@@ -4,8 +4,6 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MapDirection;
 
-import java.util.Arrays;
-
 public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
