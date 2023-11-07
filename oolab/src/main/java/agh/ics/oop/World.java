@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.OptionsParser;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MapDirection;
 
@@ -31,7 +32,6 @@ public class World {
         System.out.println("Początkowy kierunek: " + MapDirection.NORTH);
         System.out.println("Następny kierunek: " + MapDirection.NORTH.next());
         System.out.println("Poprzedni kierunek: " + MapDirection.NORTH.previous());
-        System.out.println("Wektor jednostkowy " + MapDirection.NORTH.toUnitVector());
 
     }
 }

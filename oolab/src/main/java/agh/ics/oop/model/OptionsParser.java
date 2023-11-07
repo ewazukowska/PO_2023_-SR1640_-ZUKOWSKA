@@ -1,6 +1,4 @@
-package agh.ics.oop;
-
-import agh.ics.oop.model.MoveDirection;
+package agh.ics.oop.model;
 
 public class OptionsParser {
     public static MoveDirection[] parse(String[] args) {
