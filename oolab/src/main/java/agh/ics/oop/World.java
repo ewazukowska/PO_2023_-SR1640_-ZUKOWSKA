@@ -3,7 +3,6 @@ package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.Animal;
 
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class World {
         System.out.println("Następny kierunek: " + MapDirection.NORTH.next());
         System.out.println("Poprzedni kierunek: " + MapDirection.NORTH.previous());
 
-        Animal animal1 = new Animal();
-        Animal animal2 = new Animal(new Vector2d(3, 4));
+        //Animal animal1 = new Animal();
+        //Animal animal2 = new Animal(new Vector2d(3, 4));
 
         //System.out.println(animal1);
         //System.out.println(animal2);
