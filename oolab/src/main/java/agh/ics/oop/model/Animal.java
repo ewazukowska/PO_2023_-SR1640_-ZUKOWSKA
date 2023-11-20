@@ -5,16 +5,9 @@ public class Animal {
     private Vector2d position;
     private MoveValidator moveValidator;
     public static final Vector2d BEGINNING = new Vector2d(0, 0);
-    public static final Vector2d END = new Vector2d(4, 4);
-
-    public Animal(Vector2d position, MapDirection north) {
-        this(new Vector2d(2, 2));
-        this.moveValidator = moveValidator;
-    }
 
     public Animal(Vector2d initialPosition) {
         this.position = initialPosition;
-        this.moveValidator = moveValidator;
     }
     public Vector2d getPosition() {
         return position;
