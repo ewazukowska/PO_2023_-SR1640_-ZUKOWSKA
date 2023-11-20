@@ -31,19 +31,20 @@ public class World {
         System.out.println("Następny kierunek: " + MapDirection.NORTH.next());
         System.out.println("Poprzedni kierunek: " + MapDirection.NORTH.previous());
         */
-        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(0, 1));
-        WorldMap worldMap = new RectangularMap(5, 5);
-        for (Vector2d position : positions) {
-            worldMap.place(new Animal(position, MapDirection.NORTH));
-        }
+        WorldMap map = new RectangularMap(9, 5);
 
-        Simulation simulation = new Simulation(positions, directions, worldMap);
+        Animal animal1 = new Animal(new Vector2d(0, 0));
+        Animal animal2 = new Animal(new Vector2d(3, 4));
+        map.place(animal1);
+        map.place(animal2);
+        String mapRepresentation = map.toString();
+        System.out.println(mapRepresentation);
+/*
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
 
+        Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
-
-
-
-
+*/
     }
 }
 

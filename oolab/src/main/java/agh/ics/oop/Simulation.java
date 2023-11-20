@@ -1,8 +1,5 @@
 package agh.ics.oop;
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,21 +7,21 @@ import java.util.List;
 
 public class Simulation {
     private final List<MoveDirection> moves;
-    private WorldMap worldMap;
+    private WorldMap map;
     private final List<Animal> animals;
 
 
 
     public Simulation(List<Vector2d> initialPositions, List<MoveDirection> moves, WorldMap worldMap) {
         this.moves = moves;
-        this.worldMap = worldMap;
+        this.map = worldMap;
         this.animals = createAnimals(initialPositions);
     }
 
     public List<Animal> createAnimals(List<Vector2d> initialPositions) {
         List<Animal> animals = new ArrayList<>();
         for (Vector2d position : initialPositions) {
-            worldMap.place(new Animal(position));
+            map.place(new Animal(position));
             animals.add(new Animal(position));
         }
         return animals;
@@ -36,11 +33,15 @@ public class Simulation {
         System.out.println(animals);
 
         for (int i = 0; i < nrOfMoves; i++) {
+
             Animal currentAnimal = animals.get(i % nrOfAnimals);
             MoveDirection currentMove = moves.get(i);
 
-            worldMap.move(currentAnimal, currentMove);
-            System.out.println("Aktualny stan mapy:\n" + worldMap);
+            map.place(currentAnimal);
+            map.move(currentAnimal, currentMove);
+            map.place(currentAnimal);
+            String mapRepresentation = map.toString();
+            System.out.println(mapRepresentation);
         }
 
     }

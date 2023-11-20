@@ -6,10 +6,6 @@ public class RectangularMap implements WorldMap {
     Map<Vector2d, Animal> animals = new HashMap<>();
     private int width;
     private int height;
-    Vector2d lowerLeft = BEGINNING;
-    Vector2d upperRight = new Vector2d (width - 1, height -1);
-
-
 
     public RectangularMap(int width, int height) {
         this.height = height;
@@ -44,12 +40,12 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public String toString() {
-        MapVisualizer mapVisualizer = new MapVisualizer(this);
-        return mapVisualizer.draw(lowerLeft , upperRight);
+        MapVisualizer visualizer = new MapVisualizer(this);
+        return visualizer.draw( BEGINNING , new Vector2d (width, height));
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.follows(lowerLeft) && position.precedes(upperRight);
+        return position.follows(BEGINNING) && position.precedes(new Vector2d (width, height));
     }
 }
