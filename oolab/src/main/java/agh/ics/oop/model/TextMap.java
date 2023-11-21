@@ -21,7 +21,7 @@ public class TextMap implements WorldMap<String, Integer> {
         int index = texts.indexOf(text);
 
         if (index == -1) {
-            return; // Text not found
+            return;
         }
 
         if (direction == MoveDirection.FORWARD && index < texts.size() - 1) {
