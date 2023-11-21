@@ -2,8 +2,8 @@ package agh.ics.oop.model;
 import java.util.HashMap;
 import java.util.Map;
 import static agh.ics.oop.model.Animal.BEGINNING;
-public class RectangularMap implements WorldMap {
-    Map<Vector2d, Animal> animals = new HashMap<>();
+public class RectangularMap<T, P> implements WorldMap<T, P> {
+    private final Map<T, P> objects = new HashMap<>();
     private int width;
     private int height;
     Vector2d lowerLeft = BEGINNING;
@@ -15,31 +15,40 @@ public class RectangularMap implements WorldMap {
         this.height = height;
         this.width = width;
     }
+    public Vector2d getObjectPosition(T object) {
+        for (Map.Entry<T, P> entry : objects.entrySet()) {
+            if (entry.getValue().equals(object)) {
+                return (Vector2d) entry.getKey();
+            }
+    }
+        return null;
+    }
     @Override
-    public boolean place(Animal animal) {
-        Vector2d animalPosition = animal.getPosition();
+    public boolean place(T object) {
+        Vector2d objectPosition = (Vector2d) getObjectPosition(object);
 
-        if (!canMoveTo(animalPosition) || isOccupied(animalPosition)) {
+        if (!canMoveTo((Vector2d) objectPosition) || isOccupied((P) objectPosition)) {
             return false;
         }
-        animals.put(animalPosition, animal);
+        objects.put(object, (P) objectPosition);
         return true;
 
     }
+
     @Override
-    public void move(Animal animal, MoveDirection direction) {
-
-        animal.move(direction);
-
-
+    public void move(T object, MoveDirection direction) {
+        if (object instanceof Animal) {
+            Animal animal = (Animal) object;
+            animal.move(direction);
+            }
+        }
+    @Override
+    public boolean isOccupied(P position) {
+        return objects.containsKey(position);
     }
     @Override
-    public boolean isOccupied(Vector2d position) {
-        return animals.containsKey(position);
-    }
-    @Override
-    public Animal objectAt(Vector2d position) {
-        return animals.get(position);
+    public Object objectAt(P position) {
+        return objects.get(position);
     }
 
     @Override

@@ -8,24 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Simulation {
+public class Simulation<T extends Animal> {
     private final List<MoveDirection> moves;
-    private WorldMap worldMap;
-    private final List<Animal> animals;
+    final WorldMap<T, Vector2d> map;
+    private final List<T> animals;
 
 
 
-    public Simulation(List<Vector2d> initialPositions, List<MoveDirection> moves, WorldMap worldMap) {
+    public Simulation(List<Vector2d> initialPositions, List<MoveDirection> moves, WorldMap map) {
         this.moves = moves;
-        this.worldMap = worldMap;
+        this.map = map;
         this.animals = createAnimals(initialPositions);
     }
 
-    public List<Animal> createAnimals(List<Vector2d> initialPositions) {
-        List<Animal> animals = new ArrayList<>();
+    public List<T> createAnimals(List<Vector2d> initialPositions) {
+        List<T> animals = new ArrayList<>();
         for (Vector2d position : initialPositions) {
-            worldMap.place(new Animal(position));
-            animals.add(new Animal(position));
+            map.place((T) new Animal(position));
+            animals.add((T) new Animal(position));
         }
         return animals;
     }
@@ -36,11 +36,11 @@ public class Simulation {
         System.out.println(animals);
 
         for (int i = 0; i < nrOfMoves; i++) {
-            Animal currentAnimal = animals.get(i % nrOfAnimals);
+            T currentAnimal = animals.get(i % nrOfAnimals);
             MoveDirection currentMove = moves.get(i);
 
-            worldMap.move(currentAnimal, currentMove);
-            System.out.println("Aktualny stan mapy:\n" + worldMap);
+            map.move(currentAnimal, currentMove);
+            System.out.println("Aktualny stan mapy:\n" + map);
         }
 
     }

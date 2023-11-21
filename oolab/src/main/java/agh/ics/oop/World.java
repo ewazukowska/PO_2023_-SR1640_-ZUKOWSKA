@@ -30,7 +30,7 @@ public class World {
         System.out.println("Początkowy kierunek: " + MapDirection.NORTH);
         System.out.println("Następny kierunek: " + MapDirection.NORTH.next());
         System.out.println("Poprzedni kierunek: " + MapDirection.NORTH.previous());
-        */
+
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(0, 1));
         WorldMap worldMap = new RectangularMap(5, 5);
         for (Vector2d position : positions) {
@@ -40,7 +40,7 @@ public class World {
         Simulation simulation = new Simulation(positions, directions, worldMap);
 
         simulation.run();
-
+  */
 
 
 
