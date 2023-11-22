@@ -39,12 +39,10 @@ public class World {
         map.place(animal2);
         String mapRepresentation = map.toString();
         System.out.println(mapRepresentation);
-/*
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-
         Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
-*/
+
     }
 }
 
