@@ -3,7 +3,6 @@ package agh.ics.oop.model;
 public class Animal {
     private MapDirection orientation= MapDirection.NORTH;
     private Vector2d position;
-    private MoveValidator moveValidator;
     public static final Vector2d BEGINNING = new Vector2d(0, 0);
 
     public Animal(Vector2d initialPosition) {
@@ -31,7 +30,7 @@ public class Animal {
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, MoveValidator moveValidator) {
         Vector2d newPosition = null;
         switch (direction) {
             case RIGHT -> orientation = orientation.next();

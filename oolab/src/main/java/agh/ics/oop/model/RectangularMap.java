@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import static agh.ics.oop.model.Animal.BEGINNING;
 public class RectangularMap implements WorldMap {
-    Map<Vector2d, Animal> animals = new HashMap<>();
+    private final Map<Vector2d, Animal> animals = new HashMap<>();
     private int width;
     private int height;
 
@@ -25,8 +25,9 @@ public class RectangularMap implements WorldMap {
     @Override
     public void move(Animal animal, MoveDirection direction) {
 
-        animal.move(direction);
-
+        animals.remove(animal.getPosition());
+        animal.move(direction, this);
+        animals.put(animal.getPosition(), animal);
 
     }
     @Override
@@ -46,6 +47,6 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.follows(BEGINNING) && position.precedes(new Vector2d (width, height));
+        return position.follows(BEGINNING) && position.precedes(new Vector2d (width, height)) && !isOccupied(position);
     }
 }
