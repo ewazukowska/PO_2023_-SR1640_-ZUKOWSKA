@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.MapDirection;
+import agh.ics.oop.model.*;
 
 import java.util.List;
 
@@ -11,7 +9,7 @@ public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
         List<MoveDirection> directions = OptionsParser.parse(args);
-
+/*
         for (MoveDirection direction : directions) {
                 switch (direction) {
                     case FORWARD -> System.out.println("Zwierzak idzie do przodu");
@@ -23,7 +21,7 @@ public class World {
 
         System.out.println("System zakończył działanie");
 
-        Vector2d position1 = new Vector2d(1,2);
+         Vector2d position1 = new Vector2d(1,2);
         System.out.println(position1);
         Vector2d position2 = new Vector2d(-2,1);
         System.out.println(position2);
@@ -32,20 +30,21 @@ public class World {
         System.out.println("Początkowy kierunek: " + MapDirection.NORTH);
         System.out.println("Następny kierunek: " + MapDirection.NORTH.next());
         System.out.println("Poprzedni kierunek: " + MapDirection.NORTH.previous());
+        */
+        WorldMap map = new RectangularMap(9, 5);
 
-        //Animal animal1 = new Animal();
-        //Animal animal2 = new Animal(new Vector2d(3, 4));
-
-        //System.out.println(animal1);
-        //System.out.println(animal2);
-        //animal2.move(MoveDirection.FORWARD);
-        //System.out.println(animal2);
-
+        Animal animal1 = new Animal(new Vector2d(0, 0));
+        Animal animal2 = new Animal(new Vector2d(3, 4));
+        map.place(animal1);
+        map.place(animal2);
+        String mapRepresentation = map.toString();
+        System.out.println(mapRepresentation);
+/*
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
-
+*/
     }
 }
 

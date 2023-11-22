@@ -5,6 +5,7 @@ import agh.ics.oop.model.Animal;
 
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.WorldMap;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,8 +17,8 @@ public class SimulationTest {
     String[] args = { "f", "b", "r", "l" };
     List<MoveDirection> directions = OptionsParser.parse(args);
     List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-
-    Simulation simulation = new Simulation(positions, directions);
+    private WorldMap worldMap;
+    Simulation simulation = new Simulation(positions, directions, worldMap);
     List<Animal> animals = simulation.createAnimals(positions);
     //orientacja
     @Test
