@@ -1,21 +1,12 @@
 package agh.ics.oop.model;
 
-
 public class GrassField extends AbstractWorldMap {
 
     public GrassField(int numberOfGrassFields) {
-        for (int i = 0; i < numberOfGrassFields; i++) {
-            Vector2d position;
-            Grass newGrass;
-            do {
-                position = new Vector2d(
-                        (int) (Math.random() * Math.sqrt(numberOfGrassFields * 10)),
-                        (int) (Math.random() * Math.sqrt(numberOfGrassFields * 10))
-                );
-            } while (grass.containsKey(position));
-            newGrass = new Grass(position);
-            grass.put(position, newGrass);
-    } System.out.println(grass);
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) (Math.random() * Math.sqrt(numberOfGrassFields * 10)), (int) (Math.random() * Math.sqrt(numberOfGrassFields * 10)), numberOfGrassFields);
+        for(Vector2d grassPosition : randomPositionGenerator) {
+            grass.put(grassPosition, new Grass(grassPosition));
+        }
     }
 
     public Vector2d calculateUpperRight() {

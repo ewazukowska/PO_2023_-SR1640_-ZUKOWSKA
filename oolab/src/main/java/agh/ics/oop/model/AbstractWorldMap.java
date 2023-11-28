@@ -1,9 +1,6 @@
 package agh.ics.oop.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AbstractWorldMap implements WorldMap {
 
@@ -60,5 +57,11 @@ public class AbstractWorldMap implements WorldMap {
     }
     public List<Grass> getGrass() {
         return new ArrayList<>(grass.values());
+    }
+    @Override
+    public Collection<WorldElement> getElements() {
+        List<WorldElement> elements = new ArrayList<>(animals.values());
+        elements.addAll(grass.values());
+        return elements;
     }
 }

@@ -2,6 +2,8 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -29,15 +31,15 @@ public class World {
 
         Simulation simulation = new Simulation(directions, map);
 
-       simulation.run();
+       //simulation.run();
 
 
         WorldMap map2 = new GrassField(10);
         Simulation simulation2 = new Simulation(directions, map2);
         map2.place(animal1);
         map2.place(animal2);
-        System.out.println(map2.getAnimals());
         simulation2.run();
+
         System.out.println("System zakończył działanie");
     }
 }

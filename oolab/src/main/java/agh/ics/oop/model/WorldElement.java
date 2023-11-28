@@ -8,9 +8,6 @@ public interface WorldElement {
 
     String toString();
 
-    default Collection<WorldElement> getElements() {
-        return List.of(this);
-    }
 }
 
 
