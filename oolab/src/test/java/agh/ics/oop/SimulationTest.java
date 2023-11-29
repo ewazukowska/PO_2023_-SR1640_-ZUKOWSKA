@@ -9,8 +9,9 @@ import agh.ics.oop.model.WorldMap;
 import org.junit.jupiter.api.Test;
 
 
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SimulationTest {
 
@@ -18,8 +19,8 @@ public class SimulationTest {
     List<MoveDirection> directions = OptionsParser.parse(args);
     List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
     private WorldMap worldMap;
-    Simulation simulation = new Simulation(positions, directions, worldMap);
-    List<Animal> animals = simulation.createAnimals(positions);
+    Simulation simulation = new Simulation(directions, worldMap);
+    private final Map<Vector2d, Animal> animals = new HashMap<>();
     //orientacja
     @Test
     public void testOrientation() {
