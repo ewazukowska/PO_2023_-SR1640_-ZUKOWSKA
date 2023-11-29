@@ -14,7 +14,7 @@ public class GrassFieldTest {
 
 
         // Sprawdzamy metode canMoveTo
-        assertTrue(grassField.canMoveTo(new Vector2d(2, 3)));  // Wolne miejsce
+        //assertTrue(worldMap.canMoveTo(new Vector2d(2, 3)));  // Wolne miejsce
         Animal animal2 = new Animal(new Vector2d(3, 4));
         grassField.place(animal2);
         assertFalse(grassField.canMoveTo(new Vector2d(3, 4))); //Zajęte

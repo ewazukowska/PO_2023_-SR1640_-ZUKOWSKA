@@ -1,6 +1,11 @@
 package agh.ics.oop.model;
 
+
+import java.util.*;
+
 public class GrassField extends AbstractWorldMap {
+
+    protected Map<Vector2d, Grass> grass = new HashMap<>();
 
     public GrassField(int numberOfGrassFields) {
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) (Math.random() * Math.sqrt(numberOfGrassFields * 10)), (int) (Math.random() * Math.sqrt(numberOfGrassFields * 10)), numberOfGrassFields);
@@ -10,7 +15,7 @@ public class GrassField extends AbstractWorldMap {
     }
 
     public Vector2d calculateUpperRight() {
-        Vector2d end = new Vector2d(0, 0);
+        Vector2d end = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
 
         for (Vector2d position : animals.keySet()) {
             end = end.upperRight(position);
@@ -21,7 +26,8 @@ public class GrassField extends AbstractWorldMap {
         return end;
     }
     public Vector2d calculateLowerLeft() {
-        Vector2d beginning = new Vector2d(0, 0);
+        Vector2d beginning = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
+
         for (Vector2d position : animals.keySet()) {
             beginning = beginning.lowerLeft(position);
         }
@@ -42,14 +48,21 @@ public class GrassField extends AbstractWorldMap {
 
         return element;
     }
-    @Override
-    public boolean canMoveTo(Vector2d position) {
-        return !animals.containsKey(position);
-    }
 
     @Override
     public String toString() {
         MapVisualizer visualizer = new MapVisualizer(this);
         return visualizer.draw(calculateLowerLeft(), calculateUpperRight());
+    }
+
+    public List<Grass> getGrass() {
+        return new ArrayList<>(grass.values());
+    }
+
+    @Override
+    public Collection<WorldElement> getElements() {
+        var elements = super.getElements();
+        elements.addAll(grass.values());
+        return elements;
     }
 }

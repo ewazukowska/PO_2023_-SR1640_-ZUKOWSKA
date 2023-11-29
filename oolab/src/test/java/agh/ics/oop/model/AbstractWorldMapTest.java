@@ -10,8 +10,8 @@ public class AbstractWorldMapTest {
         AbstractWorldMap worldMap = new AbstractWorldMap();
         Vector2d beginning = new Vector2d(2, 2);
         Vector2d end = new Vector2d(5, 5);
-        worldMap.BEGINNING = beginning;
-        worldMap.END = end;
+        worldMap.beginning = beginning;
+        worldMap.end = end;
         Animal animal = new Animal(new Vector2d(4, 4));
 
         //place - umieszczamy zwierzę na mapie
@@ -42,7 +42,5 @@ public class AbstractWorldMapTest {
         assertEquals(1, worldMap.getAnimals().size()); //mamy na razei jedno zwierzę
         assertTrue(worldMap.getAnimals().contains(animal));
 
-        // Narazie nie ma traw, więc getGrass powinno zwrócić 0
-        assertEquals(0, worldMap.getGrass().size());
     }
 }
