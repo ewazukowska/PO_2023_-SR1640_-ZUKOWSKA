@@ -49,12 +49,6 @@ public class GrassField extends AbstractWorldMap {
         return element;
     }
 
-    @Override
-    public String toString() {
-        MapVisualizer visualizer = new MapVisualizer(this);
-        return visualizer.draw(calculateLowerLeft(), calculateUpperRight());
-    }
-
     public List<Grass> getGrass() {
         return new ArrayList<>(grass.values());
     }
@@ -64,5 +58,12 @@ public class GrassField extends AbstractWorldMap {
         var elements = super.getElements();
         elements.addAll(grass.values());
         return elements;
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        Vector2d beginning = calculateLowerLeft();
+        Vector2d end = calculateUpperRight();
+        return new Boundary(beginning, end);
     }
 }
