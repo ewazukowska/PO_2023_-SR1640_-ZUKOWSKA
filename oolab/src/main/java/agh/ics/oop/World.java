@@ -40,7 +40,7 @@ public class World {
             Simulation simulation = new Simulation(directions, map1);
 
             simulation.run();
-*/
+
             GrassField map2 = new GrassField(10);
 
             ConsoleMapDisplay observer2 = new ConsoleMapDisplay();
@@ -52,18 +52,10 @@ public class World {
 
             Simulation simulation2 = new Simulation(directions, map2);
 
-            try {
-                map2.place(animal1);
-                map2.place(animal2);
-                //map2.place(animal2); // sprawdzenie czy działą wyjątek
-            } catch (PositionAlreadyOccupiedException e) {
-                e.printStackTrace();
-            }
 
             simulation2.run();
-
             System.out.println("System zakończył działanie");
-
+*/
 
     }
 

@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.*;
 
-public class AbstractWorldMap implements WorldMap {
+public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
     protected List<MapChangeListener> observers = new ArrayList<>();
 
@@ -47,10 +47,6 @@ public class AbstractWorldMap implements WorldMap {
     @Override
     public Collection<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
-    }
-    @Override
-    public Boundary getCurrentBounds() {
-        return null;
     }
 
     @Override

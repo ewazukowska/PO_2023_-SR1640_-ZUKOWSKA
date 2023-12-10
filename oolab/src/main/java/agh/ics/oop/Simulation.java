@@ -8,10 +8,17 @@ public class Simulation {
     private List<Animal> animals;
     private final List<MoveDirection> moves;
     private final WorldMap map;
-
-    public Simulation(List<MoveDirection> moves, WorldMap map) {
+    public Simulation(List<MoveDirection> moves, List<Vector2d> positions, WorldMap map) {
         this.moves = moves;
         this.map = map;
+
+        for (Vector2d position : positions){
+            try{
+                map.place(new Animal(position));
+            } catch (PositionAlreadyOccupiedException e){
+                e.printStackTrace();
+            }
+        }
     }
     public void run() {
         animals = map.getAnimals();
@@ -25,6 +32,5 @@ public class Simulation {
             map.move(currentAnimal, currentMove);
         }
     }
-
 }
 
