@@ -22,9 +22,7 @@ public class Simulation {
         for (int i = 0; i < nrOfMoves; i++) {
             Animal currentAnimal = animals.get(i % nrOfAnimals);
             MoveDirection currentMove = moves.get(i);
-
             map.move(currentAnimal, currentMove);
-            System.out.println(map);
         }
     }
 

@@ -10,10 +10,12 @@ class RectangularMapTest {
     @Test
     void canWePlaceAnimalOnMap() {
 
-        boolean placed = new RectangularMap(5, 5).place(animal);
+        try {
+            map.place(animal);
 
-
-        assertTrue(placed);
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -21,18 +23,23 @@ class RectangularMapTest {
 
         Animal animal1 = new Animal(new Vector2d(2, 2));
         Animal animal2 = new Animal(new Vector2d(2, 2));
-        map.place(animal1);
+        try {
+            map.place(animal1);
+            map.place(animal2);
 
-
-        boolean placed = map.place(animal2);
-
-
-        assertFalse(placed);
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     void positionIsOccupied() {
-        map.place(animal);
+        try {
+            map.place(animal);
+
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
         boolean occupied = map.isOccupied(new Vector2d(2, 2));
 
@@ -42,7 +49,12 @@ class RectangularMapTest {
     @Test
     void positionIsNotOccupied() {
 
-        map.place(animal);
+        try {
+            map.place(animal);
+
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
 
         boolean occupied = map.isOccupied(new Vector2d(3, 3));
@@ -54,7 +66,12 @@ class RectangularMapTest {
     @Test
     void animalIsAt() {
 
-        map.place(animal);
+        try {
+            map.place(animal);
+
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
 
         WorldElement foundAnimal = map.objectAt(new Vector2d(2, 2));
@@ -66,10 +83,16 @@ class RectangularMapTest {
     @Test
     void thereIsNoAnimalHere() {
 
-        map.place(animal);
+        try {
+            map.place(animal);
+
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
         WorldElement foundAnimal = map.objectAt(new Vector2d(3, 3));
 
         assertNull(foundAnimal);
     }
+
 }

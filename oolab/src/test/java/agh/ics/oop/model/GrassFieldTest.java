@@ -14,10 +14,16 @@ public class GrassFieldTest {
 
 
         // Sprawdzamy metode canMoveTo
-        //assertTrue(worldMap.canMoveTo(new Vector2d(2, 3)));  // Wolne miejsce
-        Animal animal2 = new Animal(new Vector2d(3, 4));
-        grassField.place(animal2);
-        assertFalse(grassField.canMoveTo(new Vector2d(3, 4))); //Zajęte
+
+         assertTrue(grassField.canMoveTo(new Vector2d(2, 3)));  // Wolne miejsce
+         Animal animal = new Animal(new Vector2d(3, 4));
+        try {
+            grassField.place(animal);
+
+        } catch (PositionAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
+         assertFalse(grassField.canMoveTo(new Vector2d(3, 4))); //Zajęte
 
 
         // Sprawdzamy, czy metoda objectAt zwraca trawę
