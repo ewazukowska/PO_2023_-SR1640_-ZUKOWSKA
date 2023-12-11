@@ -5,6 +5,11 @@ import java.util.*;
 public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
     protected List<MapChangeListener> observers = new ArrayList<>();
+    private static int nextId = 1;
+    protected int id;
+    public AbstractWorldMap() {
+        this.id = nextId++;
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -68,5 +73,11 @@ public abstract class AbstractWorldMap implements WorldMap {
             observer.mapChanged(this, message);
         }
     }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
 
 }

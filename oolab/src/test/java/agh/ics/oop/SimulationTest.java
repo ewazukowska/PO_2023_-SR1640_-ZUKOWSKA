@@ -1,11 +1,8 @@
 package agh.ics.oop;
 import static org.junit.jupiter.api.Assertions.*;
 
-import agh.ics.oop.model.Animal;
+import agh.ics.oop.model.*;
 
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
 import org.junit.jupiter.api.Test;
 
 
@@ -18,14 +15,17 @@ public class SimulationTest {
     String[] args = { "f", "b", "r", "l" };
     List<MoveDirection> directions = OptionsParser.parse(args);
     List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-    private WorldMap worldMap;
-    Simulation simulation = new Simulation(directions, worldMap);
-    private final Map<Vector2d, Animal> animals = new HashMap<>();
+    RectangularMap worldMap = new RectangularMap(9, 4);
+    Animal animal1 = new Animal(new Vector2d(0, 0));
+    Animal animal2 = new Animal(new Vector2d(3, 4));
+
+    Simulation simulation = new Simulation(directions, List.of(animal1.getPosition(), animal2.getPosition()), worldMap);
+    private final List animals = List.of(animal1.getPosition(), animal2.getPosition());
     //orientacja
     @Test
     public void testOrientation() {
-        assertEquals("Animal at (2,2) is facing Północ", animals.get(0).toString());
-        assertEquals("Animal at (3,4) is facing Wschód", animals.get(1).toString());
+        assertEquals(new Vector2d(0,0), animals.get(0));
+        assertEquals(new Vector2d(3,4), animals.get(1));
     }
     /* @Test
     public void testMove() {
