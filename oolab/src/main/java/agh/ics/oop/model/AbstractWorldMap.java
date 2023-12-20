@@ -2,9 +2,14 @@ package agh.ics.oop.model;
 
 import java.util.*;
 
-public class AbstractWorldMap implements WorldMap {
+public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
     protected List<MapChangeListener> observers = new ArrayList<>();
+    private static int nextId = 1;
+    protected int id;
+    public AbstractWorldMap() {
+        this.id = nextId++;
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -48,10 +53,6 @@ public class AbstractWorldMap implements WorldMap {
     public Collection<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
     }
-    @Override
-    public Boundary getCurrentBounds() {
-        return null;
-    }
 
     @Override
     public String toString() {
@@ -72,5 +73,11 @@ public class AbstractWorldMap implements WorldMap {
             observer.mapChanged(this, message);
         }
     }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
 
 }

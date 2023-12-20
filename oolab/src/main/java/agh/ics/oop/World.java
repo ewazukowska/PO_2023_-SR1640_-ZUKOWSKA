@@ -1,7 +1,10 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class World {
@@ -9,7 +12,7 @@ public class World {
         System.out.println("System wystartował");
         List<MoveDirection> directions = OptionsParser.parse(args);
         try {
-
+/*
 
             for (MoveDirection direction : directions) {
                 switch (direction) {
@@ -19,59 +22,65 @@ public class World {
                     case LEFT -> System.out.println("Zwierzak idzie w lewo");
                 }
             }
-            Animal animal1 = new Animal(new Vector2d(0, 0));
-            Animal animal2 = new Animal(new Vector2d(3, 4));
-
-/*
+            List<Vector2d> positions = List.of(new Vector2d(3, 4), new Vector2d(0, 0));
 
             RectangularMap map1 = new RectangularMap(9, 4);
-
             ConsoleMapDisplay observer = new ConsoleMapDisplay();
-
             map1.addObserver(observer);
 
-            try {
-                map1.place(animal1);
-                map1.place(animal2);
+            Simulation simulation1 = new Simulation(directions, positions, map1);
+            //simulation1.run();
 
-            } catch (PositionAlreadyOccupiedException e) {
-                e.printStackTrace();
-            }
-            Simulation simulation = new Simulation(directions, map1);
-
-            simulation.run();
-*/
             GrassField map2 = new GrassField(10);
+            map2.addObserver(observer);
 
-            ConsoleMapDisplay observer2 = new ConsoleMapDisplay();
-            map2.addObserver(observer2);
+            Simulation simulation2 = new Simulation(directions, positions, map2);
+            //simulation2.run();
 
-            System.out.println(map2.calculateUpperRight());
-            System.out.println(map2.calculateLowerLeft());
-            System.out.println(map2);
+            List<Simulation> simulations = List.of(simulation1, simulation2);
 
-            Simulation simulation2 = new Simulation(directions, map2);
+            SimulationEngine simulationEngine = new SimulationEngine(simulations);
 
-            try {
-                map2.place(animal1);
-                map2.place(animal2);
-                //map2.place(animal2); // sprawdzenie czy działą wyjątek
-            } catch (PositionAlreadyOccupiedException e) {
-                e.printStackTrace();
-            }
-
-            simulation2.run();
+            //simulationEngine.runSync();
+            simulationEngine.runAsync();
 
             System.out.println("System zakończył działanie");
+*/
 
+            List <Simulation> simulations = new ArrayList<>();
+            Random random = new Random();
+            List<Thread> threads = new ArrayList<>();
 
-    }
+            for (int i = 0; i < 1000; i++) {
+                AbstractWorldMap map;
+                ConsoleMapDisplay observer;
+                int mapSizeX = random.nextInt(10) + 2;
+                int mapSizeY = random.nextInt(10) + 2;
 
+                if (Math.random() < 0.5) {
+                    map = new RectangularMap(mapSizeX, mapSizeY);
+
+                }
+                else {
+                    map = new GrassField(mapSizeY);
+                }
+                observer = new ConsoleMapDisplay();
+                map.addObserver(observer);
+                Simulation simulation = new Simulation(directions, List.of(new Vector2d(0, 0), new Vector2d(3, 4)), map);
+                simulations.add(simulation);
+            }
+            SimulationEngine simulationEngine = new SimulationEngine(simulations);
+            simulationEngine.runAsyncInThreadPool();
+            simulationEngine.awaitSimulationsEnd();
+
+        }
         catch (IllegalArgumentException er) {
             er.printStackTrace();
         }
+        catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        }
 
-
-}
+    }
 }
 
