@@ -20,25 +20,7 @@ public class RandomPositionGenerator implements Iterable<Vector2d>{
     public Iterator<Vector2d> iterator() {
         List<Vector2d> positions = generateAllPositions();
         Collections.shuffle(positions);
-
-        return new Iterator<Vector2d>() {
-            private int currentIndex = 0;
-
-            @Override
-            public boolean hasNext() {
-                return currentIndex < grassCount;
-            }
-
-            public Vector2d next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException("Wygenerowano już ostatnią pozycję");
-            }
-                Vector2d randomPosition = positions.get(currentIndex);
-                currentIndex++;
-                return randomPosition;
-        }
-
-    };
+        return positions.iterator();
     }
     private List<Vector2d> generateAllPositions() {
         List<Vector2d> positions = new ArrayList<>();

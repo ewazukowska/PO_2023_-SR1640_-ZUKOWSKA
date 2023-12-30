@@ -20,7 +20,8 @@ public class Simulation implements Runnable{
             }
         }
     }
-    public void run() {
+    @Override
+    public synchronized void run() {
         animals = map.getAnimals();
         int nrOfAnimals = animals.size();
         int nrOfMoves = moves.size();
