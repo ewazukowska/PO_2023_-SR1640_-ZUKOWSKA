@@ -20,7 +20,8 @@ public class Simulation implements Runnable{
             }
         }
     }
-    public void run() {
+    @Override
+    public synchronized void run() {
         animals = map.getAnimals();
         int nrOfAnimals = animals.size();
         int nrOfMoves = moves.size();
@@ -30,6 +31,11 @@ public class Simulation implements Runnable{
             Animal currentAnimal = animals.get(i % nrOfAnimals);
             MoveDirection currentMove = moves.get(i);
             map.move(currentAnimal, currentMove);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

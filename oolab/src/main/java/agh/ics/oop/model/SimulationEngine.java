@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 public class SimulationEngine {
-    private List<Simulation> simulations;
+    private final List<Simulation> simulations;
+    private List<Thread> threads = new ArrayList<>();
+    private ExecutorService executorService;
     public SimulationEngine(List<Simulation> simulations) {
         this.simulations = simulations;
     }
@@ -21,28 +23,26 @@ public class SimulationEngine {
     }
 
     public void runAsync() {
-        List<Thread> threads = new ArrayList<>();
         for (Simulation simulation : simulations) {
-            // Osobny wątek dla każdej symulacji
             Thread thread = new Thread(simulation);
-            threads.add(thread);
             thread.start();
+            threads.add(thread);
         }
     }
 
     public void awaitSimulationsEnd() throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        for(Thread thread : threads) {
+            thread.join();
+        }
         executorService.shutdown();
         executorService.awaitTermination(10, TimeUnit.SECONDS);
     }
     public void runAsyncInThreadPool() {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-
+        if(executorService == null) {
+            executorService = Executors.newFixedThreadPool(4);
+        }
         for (Simulation simulation : simulations) {
             executorService.submit(simulation);
         }
 
-        executorService.shutdown();
-    }
-
-}
+}}

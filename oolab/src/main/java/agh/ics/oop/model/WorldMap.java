@@ -3,6 +3,7 @@ package agh.ics.oop.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public interface WorldMap extends MoveValidator {
 
@@ -44,5 +45,5 @@ public interface WorldMap extends MoveValidator {
 
     Boundary getCurrentBounds();
 
-    int getId();
+    UUID getId();
 }
